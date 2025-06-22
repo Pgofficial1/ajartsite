@@ -1,50 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AJart Projects</title>
   <style>
     body {
-      background-color: #4ac1ff;
-      font-family: Arial, sans-serif;
+      font-family: sans-serif;
+      background: #4ac1ff;
       margin: 0;
       padding: 0;
     }
-    .header-image {
+    .banner img {
       width: 100%;
       max-height: 200px;
       object-fit: cover;
     }
-    .nav {
-      text-align: center;
-      padding: 10px;
+    .buttons {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
     }
-    .nav button {
+    .buttons button {
       margin: 5px;
-      padding: 10px 15px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      color: white;
-    }
-    .nav .about { background-color: #b0d840; }
-    .nav .services { background-color: #f38bd2; }
-    .nav .reward { background-color: #b0d840; }
-    .section-title {
-      text-align: left;
-      font-size: 20px;
-      margin: 15px;
-    }
-    .products {
       padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    .about { background: #b0d840; }
+    .services { background: #f38bd2; }
+    .rewards { background: #b0d840; }
+
+    .products {
+      padding: 15px;
     }
     .product {
       display: flex;
+      background: white;
+      border-radius: 8px;
       margin-bottom: 15px;
-      background-color: white;
-      border-radius: 10px;
       overflow: hidden;
     }
     .product img {
@@ -52,60 +49,64 @@
       height: 120px;
       object-fit: cover;
     }
-    .product-info {
+    .info {
       padding: 10px;
-      flex: 1;
     }
-    .product-title {
-      font-weight: bold;
-      margin-bottom: 5px;
+    .info h4 {
+      margin: 0 0 5px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Image -->
-  <img src="https://imgur.com/a/tC1evFr" alt="Web Banner" class="header-image" />
-
-  <!-- Navigation Buttons -->
-  <div class="nav">
-    <button class="about" onclick="location.href='about.html'">About us</button>
-    <button class="services" onclick="location.href='services.html'">Our services</button>
-    <button class="reward" onclick="location.href='earn.html'">Earn rewards 🎁</button>
+  <div class="banner">
+    <!-- ✅ Your custom web banner -->
+    <img src="https://i.imgur.com/MZn22Gm.jpg" alt="AJart Banner" />
   </div>
 
-  <!-- Latest Products -->
-  <div class="section-title">Latest products:</div>
-  <div class="products" id="blogFeed"></div>
+  <div class="buttons">
+    <button class="about" onclick="location.href='about.html'">About us</button>
+    <button class="services" onclick="location.href='services.html'">Our services</button>
+    <button class="rewards" onclick="location.href='earn.html'">Earn rewards 🎁</button>
+  </div>
+
+  <div class="products" id="latest-posts">
+    <h3>Latest Products:</h3>
+    <p>Loading...</p>
+  </div>
 
   <script>
-    fetch('https://ajartprojects.blogspot.com/feeds/posts/default?alt=json')
-      .then(response => response.json())
-      .then(data => {
-        const container = document.getElementById('blogFeed');
-        const entries = data.feed.entry.slice(0, 5);
+    fetch("https://ajartprojects.blogspot.com/feeds/posts/default?alt=json")
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById('latest-posts');
+      container.innerHTML = '<h3>Latest Products:</h3>';
+      const posts = data.feed.entry.slice(0, 5);
 
-        entries.forEach(entry => {
-          const title = entry.title.$t;
-          const link = entry.link.find(l => l.rel === "alternate").href;
-          const content = entry.content.$t;
-          const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
-          const img = imgMatch ? imgMatch[1] : "https://via.placeholder.com/120";
+      posts.forEach(entry => {
+        const title = entry.title.$t;
+        const link = entry.link.find(l => l.rel === 'alternate').href;
+        const content = entry.content.$t;
+        const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
+        const img = imgMatch ? imgMatch[1] : 'https://via.placeholder.com/120';
 
-          const div = document.createElement("div");
-          div.className = "product";
-          div.innerHTML = `
-            <a href="${link}" target="_blank">
-              <img src="${img}" alt="${title}">
-            </a>
-            <div class="product-info">
-              <div class="product-title">${title}</div>
-              <div>${content.substring(0, 70)}...</div>
-            </div>
-          `;
-          container.appendChild(div);
-        });
+        const product = document.createElement('div');
+        product.className = 'product';
+        product.innerHTML = `
+          <a href="${link}" target="_blank">
+            <img src="${img}" alt="Product image">
+          </a>
+          <div class="info">
+            <h4>${title}</h4>
+            <p>${content.replace(/<[^>]*>?/gm, '').slice(0, 70)}...</p>
+          </div>
+        `;
+        container.appendChild(product);
       });
+    })
+    .catch(error => {
+      document.getElementById('latest-posts').innerHTML = '<p>Failed to load posts. Check blog URL or connection.</p>';
+    });
   </script>
 
 </body>
