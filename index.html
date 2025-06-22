@@ -1,91 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>AJart • Make it Viral</title>
-<style>
-    /* --- Global reset --- */
-    *{box-sizing:border-box;margin:0;padding:0;font-family:"Segoe UI",sans-serif}
-    body{background:#0ac; color:#000; line-height:1.5}
-    a{text-decoration:none;color:#fff}
-
-    /* --- Banner --- */
-    .banner{background:#000 url("banner-placeholder.jpg") center/cover no-repeat;
-            padding:40px 20px;border:6px solid #ffd700;text-align:center}
-    .banner h1{color:#fff;font-size:34px;margin-bottom:6px}
-    .banner p{color:#8df;font-size:18px}
-    .tagline{color:#d9f;font-size:22px;font-weight:600;margin-top:14px}
-
-    /* --- Nav buttons --- */
-    .nav{display:flex;justify-content:center;gap:14px;margin:18px 0}
-    .btn{background:#ffeb3b;padding:10px 20px;border-radius:6px;font-weight:600;box-shadow:0 2px 4px #0004}
-    .btn:nth-child(2){background:#ff6f91}
-    .btn:nth-child(3){background:#7bdfff;display:flex;align-items:center}
-    .btn small{margin-left:4px;font-size:14px}
-
-    /* --- Latest products --- */
-    .section{padding:0 20px 50px}
-    h2{font-size:24px;margin:18px 0;font-weight:700;text-transform:lowercase}
-    .product{display:flex;gap:12px;margin-bottom:28px}
-    .product img{width:90px;height:90px;object-fit:cover;border:3px solid #fff;border-radius:8px}
-    .product p{flex:1;font-size:16px}
-
-    /* Mobile tweaks */
-    @media(max-width:420px){
-        .banner h1{font-size:28px}
-        .tagline{font-size:18px}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AJart Projects</title>
+  <style>
+    body {
+      background-color: #4ac1ff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
-</style>
+    .header-image {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+    }
+    .nav {
+      text-align: center;
+      padding: 10px;
+    }
+    .nav button {
+      margin: 5px;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      color: white;
+    }
+    .nav .about { background-color: #b0d840; }
+    .nav .services { background-color: #f38bd2; }
+    .nav .reward { background-color: #b0d840; }
+    .section-title {
+      text-align: left;
+      font-size: 20px;
+      margin: 15px;
+    }
+    .products {
+      padding: 10px;
+    }
+    .product {
+      display: flex;
+      margin-bottom: 15px;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .product img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 10px;
+      flex: 1;
+    }
+    .product-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Banner -->
-<header class="banner">
-    <h1>AJart</h1>
-    <p>make it viral</p>
-    <div class="tagline">we explore for you</div>
-</header>
+  <!-- Top Image -->
+  <img src="https://via.placeholder.com/800x200.png?text=Your+Web+Banner+Here" alt="Web Banner" class="header-image" />
 
-<!-- Navigation -->
-<nav class="nav">
-    <a class="btn" href="about.html">About&nbsp;us</a>
-    <a class="btn" href="services.html">Our&nbsp;services</a>
-    <a class="btn" href="earn.html">Earn&nbsp;rewards<small>🎁</small></a>
-</nav>
+  <!-- Navigation Buttons -->
+  <div class="nav">
+    <button class="about" onclick="location.href='about.html'">About us</button>
+    <button class="services" onclick="location.href='services.html'">Our services</button>
+    <button class="reward" onclick="location.href='earn.html'">Earn rewards 🎁</button>
+  </div>
 
-<!-- Latest products -->
-<section class="section">
-    <h2>latest products:</h2>
+  <!-- Latest Products -->
+  <div class="section-title">Latest products:</div>
+  <div class="products" id="blogFeed"></div>
 
-    <!-- Product 1 -->
-    <div class="product">
-        <img src="shoe.jpg" alt="Sneakers">
-        <p>New released Jordan shoes...</p>
-    </div>
+  <script>
+    fetch('https://ajartprojects.blogspot.com/feeds/posts/default?alt=json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('blogFeed');
+        const entries = data.feed.entry.slice(0, 5);
 
-    <!-- Product 2 -->
-    <div class="product">
-        <img src="watch.jpg" alt="Smartwatch">
-        <p>Get the cheap quality smart watch...</p>
-    </div>
+        entries.forEach(entry => {
+          const title = entry.title.$t;
+          const link = entry.link.find(l => l.rel === "alternate").href;
+          const content = entry.content.$t;
+          const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
+          const img = imgMatch ? imgMatch[1] : "https://via.placeholder.com/120";
 
-    <!-- Product 3 -->
-    <div class="product">
-        <img src="earpods.jpg" alt="EarPods">
-        <p>Get the cheap but high-quality ear pods...</p>
-    </div>
-
-    <!-- Add two more placeholders -->
-    <div class="product">
-        <img src="product4.jpg" alt="Product 4">
-        <p>Latest cool gadget coming soon...</p>
-    </div>
-    <div class="product">
-        <img src="product5.jpg" alt="Product 5">
-        <p>Top choice accessory now trending...</p>
-    </div>
-</section>
+          const div = document.createElement("div");
+          div.className = "product";
+          div.innerHTML = `
+            <a href="${link}" target="_blank">
+              <img src="${img}" alt="${title}">
+            </a>
+            <div class="product-info">
+              <div class="product-title">${title}</div>
+              <div>${content.substring(0, 70)}...</div>
+            </div>
+          `;
+          container.appendChild(div);
+        });
+      });
+  </script>
 
 </body>
-  </html>
+</html>
