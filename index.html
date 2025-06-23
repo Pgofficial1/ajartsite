@@ -1,120 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AJart Projects</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #4ac1ff;
-      margin: 0;
-      padding: 0;
-    }
-    .banner img {
-      width: 100%;
-      max-height: 100px;
-      object-fit: cover;
-    }
-    .buttons {
-      display: flex;
-      justify-content: center;
-      margin: 10px 0;
-      flex-wrap: wrap;
-    }
-    .buttons button {
-      margin: 5px;
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: none;
-      color: white;
-      cursor: pointer;
-    }
-    .about { background: #b0d840; }
-    .services { background: #f38bd2; }
-    .rewards { background: #b0d840; }
 
-    .products {
-      padding: 15px;
+  <!--  ✅  Google Font  -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root{
+      --brand-blue:#4ac1ff;
+      --card-bg:#131313;
+      --accent:#b0d840;
+      --pink:#f38bd2;
     }
-    .product {
-      display: flex;
-      background: white;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      overflow: hidden;
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#000;                       /* black page background   */
+      color:#fff;
     }
-    .product img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
+
+    /* ---------- Banner ---------- */
+    .banner img{
+      width:100%;
+      max-height:100px;
+      object-fit:cover;
     }
-    .info {
-      padding: 10px;
+
+    /* ---------- Nav buttons ---------- */
+    .buttons{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:18px 0;
     }
-    .info h4 {
-      margin: 0 0 5px;
+    .buttons button{
+      border:none;
+      padding:10px 18px;
+      font-size:15px;
+      border-radius:8px;
+      font-weight:600;
+      color:#000;
+      cursor:pointer;
+      transition:transform .15s;
+    }
+    .buttons button:hover{transform:translateY(-2px)}
+    .about   {background:var(--accent);}
+    .services{background:var(--pink);}
+    .rewards {background:var(--accent);}
+
+    /* ---------- Product list ---------- */
+    .products{padding:20px 14px}
+    .products h3{font-size:22px;margin-bottom:14px;text-transform:capitalize}
+
+    .product{
+      display:flex;
+      background:var(--card-bg);
+      border-radius:10px;
+      overflow:hidden;
+      margin-bottom:18px;
+      box-shadow:0 4px 10px #00000066;
+      transition:transform .15s,box-shadow .15s;
+    }
+    .product:hover{
+      transform:translateY(-3px);
+      box-shadow:0 6px 14px #00000099;
+    }
+    .product img{
+      width:110px;height:110px;object-fit:cover;
+    }
+    .info{padding:10px 12px;flex:1}
+    .info h4{font-size:16px;margin-bottom:6px}
+    .info p{font-size:14px;color:#ddd;line-height:1.4}
+
+    /* ---------- Footer ---------- */
+    footer{
+      border-top:1px solid #222;
+      margin-top:40px;
+      padding:18px 12px 26px;
+      text-align:center;
+      background:#0d0d0d;
+    }
+    footer .copy{font-size:14px;margin-bottom:10px;color:#aaa}
+    .social-row{
+      display:flex;justify-content:center;gap:20px;
+    }
+    .social-row a svg{
+      width:28px;height:28px;fill:var(--brand-blue);
+      transition:transform .15s,fill .2s;
+    }
+    .social-row a:hover svg{
+      transform:scale(1.15);
+      fill:#fff;
     }
   </style>
 </head>
 <body>
 
+  <!-- Banner -->
   <div class="banner">
-    <!-- ✅ Your custom web banner -->
-    <img src="https://raw.githubusercontent.com/pgofficial1/ajartsite/main/Lumii_20250622_150347501.jpg" alt="AJart Banner" />
+    <img src="https://raw.githubusercontent.com/pgofficial1/ajartsite/main/Lumii_20250622_150347501.jpg" alt="AJart Banner"/>
   </div>
 
+  <!-- Navigation buttons -->
   <div class="buttons">
-    <button class="about" onclick="location.href='about.html'">About us</button>
+    <button class="about"    onclick="location.href='about.html'">About us</button>
     <button class="services" onclick="location.href='services.html'">Our services</button>
-    <button class="rewards" onclick="location.href='earn.html'">Earn rewards 🎁</button>
+    <button class="rewards"  onclick="location.href='earn.html'">Earn rewards 🎁</button>
   </div>
 
+  <!-- Latest products (auto-loaded) -->
   <div class="products" id="latest-posts">
-    <h3>Latest Products:</h3>
-    <p>Loading...</p>
+    <h3>Latest products:</h3>
+    <p>Loading…</p>
   </div>
 
-  <!-- ✅ JSONP script callback function -->
-  <script type="text/javascript">
-    function loadPosts(data) {
-      const container = document.getElementById("latest-posts");
-      container.innerHTML = "<h3>Latest Products:</h3>";
-      const posts = data.feed.entry;
+  <!-- JSONP callback -->
+  <script>
+    function loadPosts(data){
+      const box=document.getElementById('latest-posts');
+      box.innerHTML='<h3>Latest products:</h3>';
+      const posts=data.feed.entry;
+      if(!posts){box.innerHTML+='<p>No posts found.</p>';return;}
 
-      if (!posts || posts.length === 0) {
-        container.innerHTML += "<p>No posts found.</p>";
-        return;
-      }
+      posts.slice(0,5).forEach(e=>{
+        const title=e.title.$t;
+        const link =e.link.find(l=>l.rel==="alternate").href;
+        const html =e.content.$t;
+        const img  =(html.match(/<img[^>]+src="([^">]+)/)||[])[1]||'https://via.placeholder.com/110/202020/ffffff?text=AJ';
+        const text =html.replace(/<[^>]*>?/gm,'').slice(0,70);
 
-      posts.slice(0, 5).forEach(entry => {
-        const title = entry.title.$t;
-        const link = entry.link.find(l => l.rel === "alternate").href;
-        const content = entry.content.$t;
-        const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
-        const img = imgMatch ? imgMatch[1] : "https://via.placeholder.com/120";
-
-        const product = document.createElement("div");
-        product.className = "product";
-        product.innerHTML = `
+        const card=document.createElement('div');
+        card.className='product';
+        card.innerHTML=`
           <a href="${link}" target="_blank">
-            <img src="${img}" alt="Product">
+             <img src="${img}" alt="Product">
           </a>
           <div class="info">
-            <h4>${title}</h4>
-            <p>${content.replace(/<[^>]*>?/gm, "").slice(0, 70)}...</p>
-          </div>
-        `;
-        container.appendChild(product);
+             <h4>${title}</h4>
+             <p>${text}…</p>
+          </div>`;
+        box.appendChild(card);
       });
     }
   </script>
-
-  <!-- ✅ Load Blogger JSON feed via JSONP -->
   <script src="https://ajartprojects.blogspot.com/feeds/posts/default?alt=json-in-script&callback=loadPosts"></script>
 
+  <!-- Footer -->
+  <footer>
+    <div class="copy">© AJartprojects 2025</div>
+    <div class="social-row">
+      <!-- Replace # with your real links -->
+      <a href="#" target="_blank" aria-label="X / Twitter">
+        <!-- X icon (SVG) -->
+        <svg viewBox="0 0 24 24"><path d="M22 4.01h-4.508l-4.703 6.02-4.603-6.02H2l7.7 10.127L2 20h4.508l4.802-6.137 4.802 6.137H22l-7.8-10.152L22 4.01Z"/></svg>
+      </a>
+      <a href="#" target="_blank" aria-label="YouTube">
+        <!-- YouTube icon -->
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a2.983 2.983 0 0 0-2.1-2.11C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.398.576a2.983 2.983 0 0 0-2.1 2.11A31.09 31.09 0 0 0 0 12a31.09 31.09 0 0 0 .502 5.814 2.983 2.983 0 0 0 2.1 2.11C4.4 20.5 12 20.5 12 20.5s7.6 0 9.398-.576a2.983 2.983 0 0 0 2.1-2.11A31.09 31.09 0 0 0 24 12a31.09 31.09 0 0 0-.502-5.814ZM9.75 15.02V8.98l6.25 3.02-6.25 3.02Z"/></svg>
+      </a>
+      <a href="#" target="_blank" aria-label="Telegram">
+        <!-- Telegram icon -->
+        <svg viewBox="0 0 24 24"><path d="m9.999 15.428-.452 4.51c.647 0 .924-.277 1.263-.61l3.027-2.89 6.283 4.594c1.148.632 1.969.3 2.273-.986L24 3.5l-21 8.316c-1.335.524-1.316 1.268-.24 1.6l5.372 1.68L19.422 6.45c.515-.339.983-.151.597.187"/></svg>
+      </a>
+    </div>
+  </footer>
+
 </body>
-</html>
+  </html>
       
         
