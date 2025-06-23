@@ -20,6 +20,7 @@
       display: flex;
       justify-content: center;
       margin: 10px 0;
+      flex-wrap: wrap;
     }
     .buttons button {
       margin: 5px;
@@ -75,39 +76,45 @@
     <p>Loading...</p>
   </div>
 
-  <script>
-    fetch("https://ajartprojects.blogspot.com/feeds/posts/default?alt=json")
-    .then(res => res.json())
-    .then(data => {
-      const container = document.getElementById('latest-posts');
-      container.innerHTML = '<h3>Latest Products:</h3>';
-      const posts = data.feed.entry.slice(0, 5);
+  <!-- ✅ JSONP script callback function -->
+  <script type="text/javascript">
+    function loadPosts(data) {
+      const container = document.getElementById("latest-posts");
+      container.innerHTML = "<h3>Latest Products:</h3>";
+      const posts = data.feed.entry;
 
-      posts.forEach(entry => {
+      if (!posts || posts.length === 0) {
+        container.innerHTML += "<p>No posts found.</p>";
+        return;
+      }
+
+      posts.slice(0, 5).forEach(entry => {
         const title = entry.title.$t;
-        const link = entry.link.find(l => l.rel === 'alternate').href;
+        const link = entry.link.find(l => l.rel === "alternate").href;
         const content = entry.content.$t;
         const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
-        const img = imgMatch ? imgMatch[1] : 'https://via.placeholder.com/120';
+        const img = imgMatch ? imgMatch[1] : "https://via.placeholder.com/120";
 
-        const product = document.createElement('div');
-        product.className = 'product';
+        const product = document.createElement("div");
+        product.className = "product";
         product.innerHTML = `
           <a href="${link}" target="_blank">
-            <img src="${img}" alt="Product image">
+            <img src="${img}" alt="Product">
           </a>
           <div class="info">
             <h4>${title}</h4>
-            <p>${content.replace(/<[^>]*>?/gm, '').slice(0, 70)}...</p>
+            <p>${content.replace(/<[^>]*>?/gm, "").slice(0, 70)}...</p>
           </div>
         `;
         container.appendChild(product);
       });
-    })
-    .catch(error => {
-      document.getElementById('latest-posts').innerHTML = '<p>Failed to load posts. Check blog URL or connection.</p>';
-    });
+    }
   </script>
+
+  <!-- ✅ Load Blogger JSON feed via JSONP -->
+  <script src="https://ajartprojects.blogspot.com/feeds/posts/default?alt=json-in-script&callback=loadPosts"></script>
 
 </body>
 </html>
+      
+        
