@@ -5,23 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AJart Projects</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
-
   <style>
     :root{
       --brand-blue:#4ac1ff;
       --accent:#b0d840;
       --pink:#f38bd2;
-      --neon:#39ff14;          /* neon green for product cards */
+      --neon:#39ff14;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
 
-    /* ---------- Banner ---------- */
     .banner{position:relative}
     .banner img{width:100%;max-height:140px;object-fit:cover;}
 
-    /* ---------- Hamburger menu ---------- */
     .menu-btn{
       position:absolute;top:8px;right:12px;
       background:none;border:none;font-size:30px;color:#fff;cursor:pointer;
@@ -38,7 +35,6 @@
     .menu a:last-child{border-bottom:none}
     .menu a:hover{background:#222}
 
-    /* ---------- Nav buttons ---------- */
     .buttons{
       display:flex;justify-content:center;gap:10px;flex-wrap:nowrap;padding:18px 0;
     }
@@ -51,21 +47,24 @@
     .services{background:var(--pink);}
     .rewards {background:var(--accent);}
 
-    /* ---------- Product list ---------- */
     .products{padding:20px 14px}
     .products h3{font-size:22px;margin-bottom:14px;text-transform:capitalize}
     .product{
-      display:flex;background:var(--neon);color:#000;        /* neon green card */
-      border-radius:10px;overflow:hidden;margin-bottom:18px;
+      background:var(--neon);color:#000;
+      border-radius:10px;overflow:hidden;margin-bottom:20px;
       box-shadow:0 4px 10px #00000066;transition:transform .15s;
     }
-    .product:hover{transform:translateY(-3px)}
-    .product img{width:110px;height:110px;object-fit:cover;}
-    .info{padding:10px 12px;flex:1}
-    .info h4{font-size:16px;margin-bottom:6px;color:#000}
-    .info p{font-size:14px;color:#111;line-height:1.4}
+    .product:hover{transform:translateY(-2px)}
+    .product img{
+      width:100%;height:auto;object-fit:cover;
+      max-height:200px;
+    }
+    .info{
+      padding:12px;
+    }
+    .info h4{font-size:17px;margin-bottom:8px}
+    .info p{font-size:14px;line-height:1.4;color:#111}
 
-    /* ---------- Footer ---------- */
     footer{
       border-top:1px solid #222;margin-top:40px;padding:18px 12px 26px;
       text-align:center;background:#0d0d0d;
@@ -81,22 +80,23 @@
 </head>
 <body>
 
-  <!-- Banner with hamburger menu -->
+  <!-- Banner -->
   <div class="banner">
     <img src="https://raw.githubusercontent.com/pgofficial1/ajartsite/main/Lumii_20250622_150347501.jpg" alt="AJart Banner"/>
     <button class="menu-btn" onclick="toggleMenu()">&#9776;</button>
     <div class="menu" id="menu">
       <a href="index.html">Main page</a>
       <a href="about.html">About us</a>
+      <a href="services.html">Our services</a>
       <a href="earn.html">Earn rewards</a>
     </div>
   </div>
 
   <!-- Navigation buttons -->
   <div class="buttons">
-    <button class="about"    onclick="location.href='about.html'">About us</button>
+    <button class="about" onclick="location.href='about.html'">About us</button>
     <button class="services" onclick="location.href='services.html'">Our services</button>
-    <button class="rewards"  onclick="location.href='earn.html'">Earn rewards 🎁</button>
+    <button class="rewards" onclick="location.href='earn.html'">Earn rewards 🎁</button>
   </div>
 
   <!-- Latest products -->
@@ -105,11 +105,11 @@
     <p>Loading…</p>
   </div>
 
-  <!-- JSONP callback -->
+  <!-- Scripts -->
   <script>
     function toggleMenu(){
       const m=document.getElementById('menu');
-      m.style.display = (m.style.display==='flex')?'none':'flex';
+      m.style.display = (m.style.display==='flex') ? 'none' : 'flex';
     }
 
     function loadPosts(d){
@@ -123,14 +123,19 @@
         const l=e.link.find(x=>x.rel==='alternate').href;
         const h=e.content.$t;
         const img=(h.match(/<img[^>]+src="([^">]+)/)||[])[1]||
-                  'https://via.placeholder.com/110/202020/ffffff?text=AJ';
-        const txt=h.replace(/<[^>]*>?/gm,'').slice(0,70);
+                  'https://via.placeholder.com/300x200/202020/ffffff?text=AJ';
+        const txt=h.replace(/<[^>]*>?/gm,'').slice(0,80);
 
         const c=document.createElement('div');
         c.className='product';
         c.innerHTML=`
-          <a href="${l}" target="_blank"><img src="${img}" alt="Product"></a>
-          <div class="info"><h4>${t}</h4><p>${txt}…</p></div>`;
+          <a href="${l}" target="_blank">
+            <img src="${img}" alt="Product">
+          </a>
+          <div class="info">
+            <h4>${t}</h4>
+            <p>${txt}...</p>
+          </div>`;
         box.appendChild(c);
       });
     }
@@ -141,11 +146,17 @@
   <footer>
     <div class="copy">© AJartprojects 2025</div>
     <div class="social-row">
-      <a href="#" target="_blank" aria-label="X"><svg viewBox="0 0 24 24"><path d="M22 4.01h-4.508l-4.703 6.02-4.603-6.02H2l7.7 10.127L2 20h4.508l4.802-6.137 4.802 6.137H22l-7.8-10.152L22 4.01Z"/></svg></a>
-      <a href="#" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a2.983 2.983 0 0 0-2.1-2.11C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.398.576a2.983 2.983 0 0 0-2.1 2.11A31.09 31.09 0 0 0 0 12a31.09 31.09 0 0 0 .502 5.814 2.983 2.983 0 0 0 2.1 2.11C4.4 20.5 12 20.5 12 20.5s7.6 0 9.398-.576a2.983 2.983 0 0 0 2.1-2.11A31.09 31.09 0 0 0 24 12a31.09 31.09 0 0 0-.502-5.814ZM9.75 15.02V8.98l6.25 3.02-6.25 3.02Z"/></svg></a>
-      <a href="#" target="_blank" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="m9.999 15.428-.452 4.51c.647 0 .924-.277 1.263-.61l3.027-2.89 6.283 4.594c1.148.632 1.969.3 2.273-.986L24 3.5l-21 8.316c-1.335.524-1.316 1.268-.24 1.6l5.372 1.68L19.422 6.45c.515-.339.983-.151.597.187"/></svg></a>
+      <a href="#" target="_blank" aria-label="X">
+        <svg viewBox="0 0 24 24"><path d="M22 4.01h-4.508l-4.703 6.02-4.603-6.02H2l7.7 10.127L2 20h4.508l4.802-6.137 4.802 6.137H22l-7.8-10.152L22 4.01Z"/></svg>
+      </a>
+      <a href="#" target="_blank" aria-label="YouTube">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a2.983 2.983 0 0 0-2.1-2.11C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.398.576a2.983 2.983 0 0 0-2.1 2.11A31.09 31.09 0 0 0 0 12a31.09 31.09 0 0 0 .502 5.814 2.983 2.983 0 0 0 2.1 2.11C4.4 20.5 12 20.5 12 20.5s7.6 0 9.398-.576a2.983 2.983 0 0 0 2.1-2.11A31.09 31.09 0 0 0 24 12a31.09 31.09 0 0 0-.502-5.814ZM9.75 15.02V8.98l6.25 3.02-6.25 3.02Z"/></svg>
+      </a>
+      <a href="#" target="_blank" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="m9.999 15.428-.452 4.51c.647 0 .924-.277 1.263-.61l3.027-2.89 6.283 4.594c1.148.632 1.969.3 2.273-.986L24 3.5l-21 8.316c-1.335.524-1.316 1.268-.24 1.6l5.372 1.68L19.422 6.45c.515-.339.983-.151.597.187"/></svg>
+      </a>
     </div>
   </footer>
 
 </body>
-        </html>
+  </html>
