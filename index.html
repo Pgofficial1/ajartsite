@@ -62,20 +62,25 @@
     .info{
       padding:12px;
     }
-    .info h4{font-size:17px;margin-bottom:8px}
-    .info p{font-size:14px;line-height:1.4;color:#111}
+    .info h4{font-size:17px;margin-bottom:0}
+    .info p{display:none} /* HIDE DESCRIPTION */
 
     footer{
-      border-top:1px solid #222;margin-top:40px;padding:18px 12px 26px;
-      text-align:center;background:#0d0d0d;
+      background:#fff;
+      text-align:center;
+      padding:18px 12px 26px;
+      border-top:1px solid #ccc;
+      margin-top:40px;
     }
-    footer .copy{font-size:14px;margin-bottom:10px;color:#aaa}
-    .social-row{display:flex;justify-content:center;gap:20px}
-    .social-row a svg{
-      width:28px;height:28px;fill:var(--brand-blue);
-      transition:transform .15s,fill .2s;
+    footer p{
+      color:#000;
+      margin-bottom:10px;
+      font-size:14px;
     }
-    .social-row a:hover svg{transform:scale(1.15);fill:#fff}
+    .footer img{
+      width:24px;
+      margin:0 8px;
+    }
   </style>
 </head>
 <body>
@@ -99,7 +104,7 @@
     <button class="rewards" onclick="location.href='earn.html'">Earn rewards 🎁</button>
   </div>
 
-  <!-- Latest products -->
+  <!-- Latest deals -->
   <div class="products" id="latest-posts">
     <h3>Latest Deals:</h3>
     <p>Loading…</p>
@@ -114,7 +119,7 @@
 
     function loadPosts(d){
       const box=document.getElementById('latest-posts');
-      box.innerHTML='<h3>Latest products:</h3>';
+      box.innerHTML='<h3>Latest Deals:</h3>';
       const p=d.feed.entry;
       if(!p){box.innerHTML+='<p>No posts found.</p>';return;}
 
@@ -124,7 +129,6 @@
         const h=e.content.$t;
         const img=(h.match(/<img[^>]+src="([^">]+)/)||[])[1]||
                   'https://via.placeholder.com/300x200/202020/ffffff?text=AJ';
-        const txt=h.replace(/<[^>]*>?/gm,'').slice(0,80);
 
         const c=document.createElement('div');
         c.className='product';
@@ -134,7 +138,6 @@
           </a>
           <div class="info">
             <h4>${t}</h4>
-            <p>${txt}...</p>
           </div>`;
         box.appendChild(c);
       });
@@ -143,22 +146,22 @@
   <script src="https://ajartprojects.blogspot.com/feeds/posts/default?alt=json-in-script&callback=loadPosts"></script>
 
   <!-- Footer -->
-  <footer bg color="white">
+  <footer>
     <div class="footer">
-  <p>© AJartprojects 2025</p>
-  <p>Follow us:
-       <a href="https://x.com/AJartofficial?t=BGbPWBw7zWh3VsuKIrnS4Q&s=09" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X Logo" style="width:24px;">
-    </a>
-       <a href="https://youtube.com/@ajarttv1?si=-jR-sWFTCMJmm6uK" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" style="width:24px;">
-    </a>
-       <a href="https://t.me/Ajartofficial" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" style="width:24px;">
-    </a>
-  </p>
+      <p>© AJartprojects 2025</p>
+      <p>Follow us:
+        <a href="https://x.com/AJartofficial?t=BGbPWBw7zWh3VsuKIrnS4Q&s=09" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X Logo">
+        </a>
+        <a href="https://youtube.com/@ajarttv1?si=-jR-sWFTCMJmm6uK" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+        </a>
+        <a href="https://t.me/Ajartofficial" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+        </a>
+      </p>
     </div>
   </footer>
 
 </body>
-    </html>
+</html>
