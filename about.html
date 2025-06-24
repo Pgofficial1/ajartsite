@@ -1,58 +1,20 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html><html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - AJart Projects</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AJart Projects</title>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #000;
-      color: #fff;
+      font-family: sans-serif;
+      background: #000;
       margin: 0;
       padding: 0;
-    }
-    .container {
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    .title {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #4ac1ff;
-      padding-bottom: 10px;
-    }
-    h3 {
-      color: #4ac1ff;
-      margin-top: 30px;
-    }
-    p, li {
-      font-size: 16px;
-      line-height: 1.6;
-    }
-    ul {
-      padding-left: 20px;
-    }
-    .banner {
-      width: 100%;
-      margin-bottom: 20px;
+      color: #fff;
     }
     .banner img {
       width: 100%;
-      max-height: 120px;
+      max-height: 100px;
       object-fit: cover;
-    }
-    .footer {
-      background: #111;
-      color: #ccc;
-      text-align: center;
-      padding: 20px 10px;
-      margin-top: 40px;
-    }
-    .footer img {
-      width: 24px;
-      margin: 0 10px;
     }
     .menu-btn {
       position: fixed;
@@ -86,6 +48,57 @@
     .dropdown a:hover {
       background: #444;
     }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+    .buttons button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    .about { background: #b0d840; }
+    .services { background: #f38bd2; }
+    .rewards { background: #b0d840; }.products {
+  padding: 15px;
+}
+.product {
+  display: flex;
+  background: #4ac1ff;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  color: #000;
+}
+.product img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+.info {
+  padding: 10px;
+}
+.info h4 {
+  margin: 0 0 5px;
+}
+.footer {
+  background: #111;
+  color: #ccc;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 40px;
+}
+.footer img {
+  width: 24px;
+  margin: 0 10px;
+}
+
   </style>
 </head>
 <body>
@@ -95,49 +108,58 @@
     <a href="about.html">About Us</a>
     <a href="services.html">Our Services</a>
     <a href="earn.html">Earn Rewards</a>
-  </div>  <div class="container">
-    <div class="title">About Us</div><h3>The Fact of Advertisements</h3>
-<p>Advertising is crucial for any business as it boosts visibility, attracts customers, and drives sales. It helps build brand identity and fosters customer loyalty. Choosing to advertise is the best strategy to ensure sustained growth and stay competitive in the market.</p>
-
-<h3>About AJart Projects</h3>
-<div class="banner">
-  <img src="https://raw.githubusercontent.com/pgofficial1/ajartsite/main/Lumii_20250622_150347501.jpg" alt="AJart Banner" />
-</div>
-<p>Ajartprojects is an advertising platform, having a funny and encouraging slogan: "Make It Viral".</p>
-<p>The platform is based on general advertisements (not specific to one business). This is due to the fact that the platform is subdivided into sub-platforms, as listed on the "Our Services" page of this site.</p>
-
-<h3>Why You Should Think Advertising with AJart?</h3>
-<p>The fact is that there are many great advertising platforms (to be honest), but AJart is still the best place for you, and here’s why:</p>
-
-<ul>
-  <li><strong>#1 WE OFFER DIRECT CONTACT</strong><br>
-  You can talk directly to AJart about your advertisement. That’s how it should be; something you don’t get in other advertising platforms, especially the automated ones. Advertising with AJart means you can express what you think and make your preferred choice.</li>
-
-  <li><strong>#2 BARGAIN</strong><br>
-  As we offer direct contact, this means that beyond expressing how your ad should be, you have an extra advantage: bargain. The price and cost of your ad budget can be negotiated.</li>
-
-  <li><strong>#3 EXTENSIVE ADVERTISEMENT AT LOW PRICE</strong><br>
-  With AJart, you get a great deal. Besides choosing how your ad should be and how much it costs, another big deal is that your ad will be promoted across all AJart sub-platforms (including our official partners).</li>
-</ul>
-
-<p><strong>Note:</strong><br>
-The price and type of advertisement don’t matter. What matters here is the duration of your contract with AJart to promote your ad. You’ll be informed once your ad is promoted across all platforms with a preview.</p>
-
-<p>📧 To claim these advantages, feel free to contact us: <a style="color:#4ac1ff" href="mailto:ajartprojects@gmail.com">ajartprojects@gmail.com</a></p>
-
-<p>We're here for you, to <strong>MAKE IT VIRAL 🤝</strong></p>
-
+  </div>  <div class="banner">
+    <img src="https://raw.githubusercontent.com/pgofficial1/ajartsite/main/Lumii_20250622_150347501.jpg" alt="AJart Banner" />
+  </div>  <div class="buttons">
+    <button class="about" onclick="location.href='about.html'">About us</button>
+    <button class="services" onclick="location.href='services.html'">Our services</button>
+    <button class="rewards" onclick="location.href='earn.html'">Earn rewards 🎁</button>
+  </div>  <div class="products" id="latest-posts">
+    <h3>Latest Products:</h3>
+    <p>Loading...</p>
   </div>  <div class="footer">
     <p>© AJartprojects 2025</p>
     <p>Follow us:
-      <a href="https://x.com/AJartofficial?t=1ZDouUiDpMrFbJaq9U8vGw&s=09"><img src="https://upload.wikimedia.org/wikipedia/commons/9/96/X_logo_2023.svg" alt="X" style="width:24px;filter:invert(1);"></a>
-      <a href="www.youtube.com/@AJartTV1"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
-      <a href="t.me/Ajartofficial"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram"></a>
+      <a href="https://x.com/AJartofficial?t=1ZDouUiDpMrFbJaq9U8vGw&s=09" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/9/96/X_logo_2023.svg" alt="X" style="width:24px;filter:invert(1);"></a>
+      <a href="https://youtube.com/@ajarttv1?si=-jR-sWFTCMJmm6uK" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+      <a href="https://t.me/Ajartofficial" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram"></a>
     </p>
   </div>  <script>
     function toggleMenu() {
       const menu = document.getElementById("dropdown-menu");
       menu.style.display = menu.style.display === "flex" ? "none" : "flex";
     }
+
+    fetch("https://ajartprojects.blogspot.com/feeds/posts/default?alt=json")
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById('latest-posts');
+      container.innerHTML = '<h3>Latest Products:</h3>';
+      const posts = data.feed.entry.slice(0, 10);
+
+      posts.forEach(entry => {
+        const title = entry.title.$t;
+        const link = entry.link.find(l => l.rel === 'alternate').href;
+        const content = entry.content.$t;
+        const imgMatch = content.match(/<img[^>]+src=\"([^\">]+)\"/);
+        const img = imgMatch ? imgMatch[1] : 'https://via.placeholder.com/120';
+
+        const product = document.createElement('div');
+        product.className = 'product';
+        product.innerHTML = `
+          <a href="${link}" target="_blank">
+            <img src="${img}" alt="Product image">
+          </a>
+          <div class="info">
+            <h4>${title}</h4>
+            <p>${content.replace(/<[^>]*>?/gm, '').slice(0, 70)}...</p>
+          </div>
+        `;
+        container.appendChild(product);
+      });
+    })
+    .catch(error => {
+      document.getElementById('latest-posts').innerHTML = '<p>Failed to load posts. Check blog URL or connection.</p>';
+    });
   </script></body>
-        </html>
+  </html>
