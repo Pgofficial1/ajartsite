@@ -1,4 +1,5 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -65,66 +66,90 @@
     }
     .about { background: #b0d840; }
     .services { background: #f38bd2; }
-    .rewards { background: #b0d840; }.products {
-  padding: 15px;
-}
-.product {
-  display: flex;
-  background: #4ac1ff;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  overflow: hidden;
-  color: #000;
-}
-.product img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-}
-.info {
-  padding: 10px;
-}
-.info h4 {
-  margin: 0 0 5px;
-}
-.footer {
-  background: #111;
-  color: #ccc;
-  text-align: center;
-  padding: 20px 10px;
-  margin-top: 40px;
-}
-.footer img {
-  width: 24px;
-  margin: 0 10px;
-}
+    .rewards { background: #b0d840; }
 
+    .products {
+      padding: 15px;
+    }
+    .product {
+      display: flex;
+      background: #add8e6; /* light blue */
+      border-radius: 8px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      color: #000;
+    }
+    .product img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+    }
+    .info {
+      padding: 10px;
+    }
+    .info h4 {
+      margin: 0 0 5px;
+    }
+    .footer {
+      background: #111;
+      color: #ccc;
+      text-align: center;
+      padding: 20px 10px;
+      margin-top: 40px;
+    }
+    .footer img {
+      width: 24px;
+      margin: 0 10px;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Menu button -->
   <div class="menu-btn" onclick="toggleMenu()">☰</div>
   <div class="dropdown" id="dropdown-menu">
     <a href="index.html">Main Page</a>
     <a href="about.html">About Us</a>
     <a href="services.html">Our Services</a>
     <a href="earn.html">Earn Rewards</a>
-  </div>  <div class="banner">
+  </div>
+
+  <!-- Banner -->
+  <div class="banner">
     <img src="https://raw.githubusercontent.com/pgofficial1/ajartsite/main/Lumii_20250622_150347501.jpg" alt="AJart Banner" />
-  </div>  <div class="buttons">
+  </div>
+
+  <!-- Buttons -->
+  <div class="buttons">
     <button class="about" onclick="location.href='about.html'">About us</button>
     <button class="services" onclick="location.href='services.html'">Our services</button>
     <button class="rewards" onclick="location.href='earn.html'">Earn rewards 🎁</button>
-  </div>  <div class="products" id="latest-posts">
-    <h3>Latest deals:</h3>
+  </div>
+
+  <!-- Latest Deals -->
+  <div class="products" id="latest-posts">
+    <h3>Latest Deals:</h3>
     <p>Loading...</p>
-  </div>  <div class="footer">
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
     <p>© AJartprojects 2025</p>
     <p>Follow us:
-      <a href="https://x.com/AJartofficial?t=1ZDouUiDpMrFbJaq9U8vGw&s=09" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/9/96/X_logo_2023.svg" alt="X" style="width:24px;filter:invert(1);"></a>
-      <a href="https://youtube.com/@ajarttv1?si=-jR-sWFTCMJmm6uK" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
-      <a href="https://t.me/Ajartofficial" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram"></a>
+      <a href="https://x.com/AJartofficial?t=1ZDouUiDpMrFbJaq9U8vGw&s=09" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/X_logo_2023.svg" alt="X" style="filter: invert(1);">
+      </a>
+      <a href="https://youtube.com/@ajarttv1?si=-jR-sWFTCMJmm6uK" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+      </a>
+      <a href="https://t.me/Ajartofficial" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+      </a>
     </p>
-  </div>  <script>
+  </div>
+
+  <!-- Script for menu and fetching posts -->
+  <script>
     function toggleMenu() {
       const menu = document.getElementById("dropdown-menu");
       menu.style.display = menu.style.display === "flex" ? "none" : "flex";
@@ -134,14 +159,14 @@
     .then(res => res.json())
     .then(data => {
       const container = document.getElementById('latest-posts');
-      container.innerHTML = '<h3>Latest Products:</h3>';
+      container.innerHTML = '<h3>Latest Deals:</h3>';
       const posts = data.feed.entry.slice(0, 10);
 
       posts.forEach(entry => {
         const title = entry.title.$t;
         const link = entry.link.find(l => l.rel === 'alternate').href;
         const content = entry.content.$t;
-        const imgMatch = content.match(/<img[^>]+src=\"([^\">]+)\"/);
+        const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
         const img = imgMatch ? imgMatch[1] : 'https://via.placeholder.com/120';
 
         const product = document.createElement('div');
@@ -161,5 +186,7 @@
     .catch(error => {
       document.getElementById('latest-posts').innerHTML = '<p>Failed to load posts. Check blog URL or connection.</p>';
     });
-  </script></body>
-            </html>
+  </script>
+
+</body>
+        </html>
