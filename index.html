@@ -10,7 +10,7 @@
       --brand-blue:#4ac1ff;
       --accent:#b0d840;
       --pink:#f38bd2;
-      --neon:#39ff14;
+      --white:#ffffff;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
@@ -39,18 +39,16 @@
       display:flex;justify-content:center;gap:10px;flex-wrap:nowrap;padding:18px 0;
     }
     .buttons button{
-      border:none;padding:10px 18px;font-size:15px;border-radius:8px;
-      font-weight:600;color:#000;cursor:pointer;transition:transform .15s;
+      border:none;padding:8px 14px;font-size:13px;border-radius:8px;
+      font-weight:600;color:#000;background:#fff;
+      cursor:pointer;transition:transform .15s;
     }
     .buttons button:hover{transform:translateY(-2px)}
-    .about   {background:var(--accent);}
-    .services{background:var(--pink);}
-    .rewards {background:var(--accent);}
 
     .products{padding:20px 14px}
     .products h3{font-size:22px;margin-bottom:14px;text-transform:capitalize}
     .product{
-      background:var(--neon);color:#000;
+      background:#fff;color:#000;
       border-radius:10px;overflow:hidden;margin-bottom:20px;
       box-shadow:0 4px 10px #00000066;transition:transform .15s;
     }
@@ -63,7 +61,7 @@
       padding:12px;
     }
     .info h4{font-size:17px;margin-bottom:0}
-    .info p{display:none} /* HIDE DESCRIPTION */
+    .info p{display:none}
 
     footer{
       background:#fff;
@@ -94,14 +92,15 @@
       <a href="about.html">About us</a>
       <a href="services.html">Our services</a>
       <a href="earn.html">Earn rewards</a>
+      <a href="terms.html">Terms & Conditions</a>
     </div>
   </div>
 
   <!-- Navigation buttons -->
   <div class="buttons">
-    <button class="about" onclick="location.href='about.html'">About us</button>
-    <button class="services" onclick="location.href='services.html'">Our services</button>
-    <button class="rewards" onclick="location.href='earn.html'">Earn rewards 🎁</button>
+    <button onclick="location.href='about.html'">About us</button>
+    <button onclick="location.href='services.html'">Our services</button>
+    <button onclick="location.href='earn.html'">Earn rewards 🎁</button>
   </div>
 
   <!-- Latest deals -->
@@ -149,7 +148,7 @@
   <footer>
     <div class="footer">
       <p>© AJartprojects 2025</p>
-      <p>Follow us:
+      <p>
         <a href="https://x.com/AJartofficial?t=BGbPWBw7zWh3VsuKIrnS4Q&s=09" target="_blank">
           <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X Logo">
         </a>
@@ -159,9 +158,10 @@
         <a href="https://t.me/Ajartofficial" target="_blank">
           <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
         </a>
+        <a href="terms.html" style="display:block;margin-top:10px;color:#000;text-decoration:underline;">Terms & Conditions</a>
       </p>
     </div>
   </footer>
 
 </body>
-</html>
+  </html>
