@@ -21,11 +21,12 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: #ffeb3b; /* Yellow */
+      background: #ffeb3b;
       color: #000;
-      padding-top: 170px; /* space for sticky banner */
+      padding-top: 220px; /* banner + buttons height */
     }
 
+    /* ======= Sticky Top Banner ======= */
     .banner {
       position: fixed;
       top: 0;
@@ -42,7 +43,7 @@
     }
 
     .banner img {
-      max-height: 90px;
+      max-height: 140px;
       width: auto;
       object-fit: cover;
       margin-top: 4px;
@@ -88,12 +89,20 @@
       background: #222;
     }
 
+    /* ======= Sticky Navigation Buttons ======= */
     .buttons {
+      position: fixed;
+      top: 160px;
+      left: 0;
+      width: 100%;
+      background: #ffeb3b;
+      z-index: 999;
       display: flex;
       justify-content: center;
       gap: 10px;
       flex-wrap: nowrap;
-      padding: 18px 0;
+      padding: 10px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     .buttons button {
@@ -112,6 +121,7 @@
       transform: translateY(-2px);
     }
 
+    /* ======= Embedded Blog Frame ======= */
     .blog-frame {
       width: 95%;
       height: 1200px;
@@ -123,6 +133,7 @@
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
+    /* ======= Footer ======= */
     footer {
       background: #fff;
       text-align: center;
@@ -187,6 +198,7 @@
     </div>
   </footer>
 
+  <!-- Script for menu toggle -->
   <script>
     function toggleMenu() {
       const m = document.getElementById('menu');
@@ -195,4 +207,4 @@
   </script>
 
 </body>
-</html>
+  </html>
