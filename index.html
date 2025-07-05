@@ -6,82 +6,127 @@
   <title>AJart Projects</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
-    :root{
-      --brand-blue:#4ac1ff;
-      --accent:#b0d840;
-      --pink:#f38bd2;
-      --white:#ffffff;
+    :root {
+      --brand-blue: #4ac1ff;
+      --accent: #b0d840;
+      --pink: #f38bd2;
+      --white: #ffffff;
     }
 
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:'Poppins',sans-serif;
-      background:#ffeb3b; /* CHANGED from #000 to yellow */
-      color:#000;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .banner{position:relative}
-    .banner img{width:100%;max-height:140px;object-fit:cover;}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #ffeb3b; /* Yellow */
+      color: #000;
+    }
 
-    .menu-btn{
-      position:absolute;top:8px;right:12px;
-      background:none;border:none;font-size:30px;color:#000;cursor:pointer;
+    .banner {
+      position: relative;
     }
-    .menu{
-      position:absolute;top:46px;right:10px;
-      background:#111;border:1px solid #222;border-radius:6px;
-      display:none;flex-direction:column;min-width:140px;z-index:10;
-    }
-    .menu a{
-      color:#fff;padding:10px 14px;text-decoration:none;
-      border-bottom:1px solid #222;font-size:14px;
-    }
-    .menu a:last-child{border-bottom:none}
-    .menu a:hover{background:#222}
 
-    .buttons{
-      display:flex;justify-content:center;gap:10px;flex-wrap:nowrap;padding:18px 0;
+    .banner img {
+      width: 100%;
+      max-height: 140px;
+      object-fit: cover;
     }
-    .buttons button{
-      border:none;padding:8px 14px;font-size:13px;border-radius:8px;
-      font-weight:600;color:#000;background:#fff;
-      cursor:pointer;transition:transform .15s;
-    }
-    .buttons button:hover{transform:translateY(-2px)}
 
-    .products{padding:20px 14px}
-    .products h3{font-size:22px;margin-bottom:14px;text-transform:capitalize}
-    .product{
-      background:#fff;color:#000;
-      border-radius:10px;overflow:hidden;margin-bottom:20px;
-      box-shadow:0 4px 10px #00000066;transition:transform .15s;
+    .menu-btn {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      background: none;
+      border: none;
+      font-size: 30px;
+      color: #000;
+      cursor: pointer;
     }
-    .product:hover{transform:translateY(-2px)}
-    .product img{
-      width:100%;height:auto;object-fit:cover;
-      max-height:200px;
-    }
-    .info{
-      padding:12px;
-    }
-    .info h4{font-size:17px;margin-bottom:0}
-    .info p{display:none}
 
-    footer{
-      background:#fff;
-      text-align:center;
-      padding:18px 12px 26px;
-      border-top:1px solid #ccc;
-      margin-top:40px;
+    .menu {
+      position: absolute;
+      top: 46px;
+      right: 10px;
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 6px;
+      display: none;
+      flex-direction: column;
+      min-width: 140px;
+      z-index: 10;
     }
-    footer p{
-      color:#000;
-      margin-bottom:10px;
-      font-size:14px;
+
+    .menu a {
+      color: #fff;
+      padding: 10px 14px;
+      text-decoration: none;
+      border-bottom: 1px solid #222;
+      font-size: 14px;
     }
-    .footer img{
-      width:24px;
-      margin:0 8px;
+
+    .menu a:last-child {
+      border-bottom: none;
+    }
+
+    .menu a:hover {
+      background: #222;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: nowrap;
+      padding: 18px 0;
+    }
+
+    .buttons button {
+      border: none;
+      padding: 8px 14px;
+      font-size: 13px;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #000;
+      background: #fff;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .buttons button:hover {
+      transform: translateY(-2px);
+    }
+
+    .blog-frame {
+      width: 95%;
+      height: 1200px;
+      border: none;
+      margin: auto;
+      display: block;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    footer {
+      background: #fff;
+      text-align: center;
+      padding: 18px 12px 26px;
+      border-top: 1px solid #ccc;
+      margin-top: 40px;
+    }
+
+    footer p {
+      color: #000;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .footer img {
+      width: 24px;
+      margin: 0 8px;
     }
   </style>
 </head>
@@ -107,46 +152,8 @@
     <button onclick="location.href='earn.html'">Earn rewards 🎁</button>
   </div>
 
-  <!-- Latest deals -->
-  <div class="products" id="latest-posts">
-    <h3>Latest Deals:</h3>
-    <p>Loading…</p>
-  </div>
-
-  <!-- Scripts -->
-  <script>
-    function toggleMenu(){
-      const m=document.getElementById('menu');
-      m.style.display = (m.style.display==='flex') ? 'none' : 'flex';
-    }
-
-    function loadPosts(d){
-      const box=document.getElementById('latest-posts');
-      box.innerHTML='<h3>Latest Deals:</h3>';
-      const p=d.feed.entry;
-      if(!p){box.innerHTML+='<p>No posts found.</p>';return;}
-
-      p.slice(0,10).forEach(e=>{
-        const t=e.title.$t;
-        const l=e.link.find(x=>x.rel==='alternate').href;
-        const h=e.content.$t;
-        const img=(h.match(/<img[^>]+src="([^">]+)/)||[])[1]||
-                  'https://via.placeholder.com/300x200/202020/ffffff?text=AJ';
-
-        const c=document.createElement('div');
-        c.className='product';
-        c.innerHTML=`
-          <a href="${l}" target="_blank">
-            <img src="${img}" alt="Product">
-          </a>
-          <div class="info">
-            <h4>${t}</h4>
-          </div>`;
-        box.appendChild(c);
-      });
-    }
-  </script>
-  <script src="https://ajartprojects.blogspot.com/feeds/posts/default?alt=json-in-script&callback=loadPosts"></script>
+  <!-- Embedded Blog Section -->
+  <iframe class="blog-frame" src="https://ajartprojects.blogspot.com"></iframe>
 
   <!-- Footer -->
   <footer>
@@ -167,5 +174,12 @@
     </div>
   </footer>
 
+  <script>
+    function toggleMenu() {
+      const m = document.getElementById('menu');
+      m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
+    }
+  </script>
+
 </body>
-  </html>
+      </html>
