@@ -7,9 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --brand-blue: #4ac1ff;
-      --accent: #b0d840;
-      --pink: #f38bd2;
+      --brand-yellow: #ffeb3b;
+      --brand-accent: #4ac1ff;
+      --brand-green: #4CAF50;
       --white: #ffffff;
     }
 
@@ -21,56 +21,65 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: #ffeb3b;
+      background: var(--brand-yellow);
       color: #000;
-      padding-top: 220px; /* banner + buttons height */
+      padding-top: 100px; /* header height */
     }
 
-    /* ======= Sticky Top Banner ======= */
-    .banner {
+    /* ======= Header ======= */
+    .header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      background: #ffeb3b;
-      z-index: 1000;
+      height: 80px;
+      background: var(--brand-yellow);
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      height: 160px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-    }
-
-    .banner img {
-      max-height: 140px;
-      width: auto;
-      object-fit: cover;
-      margin-top: 4px;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 1000;
     }
 
     .menu-btn {
-      position: absolute;
-      top: 8px;
-      right: 12px;
       background: none;
       border: none;
-      font-size: 30px;
+      font-size: 28px;
       color: #000;
       cursor: pointer;
     }
 
+    .title {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .logo-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* resized not cropped */
+    }
+
+    /* ======= Menu ======= */
     .menu {
       position: absolute;
-      top: 46px;
-      right: 10px;
+      top: 80px;
+      left: 10px;
       background: #111;
-      border: 1px solid #222;
       border-radius: 6px;
       display: none;
       flex-direction: column;
-      min-width: 140px;
-      z-index: 10;
+      min-width: 160px;
+      z-index: 2000;
     }
 
     .menu a {
@@ -89,48 +98,113 @@
       background: #222;
     }
 
-    /* ======= Sticky Navigation Buttons ======= */
-    .buttons {
-      position: fixed;
-      top: 160px;
-      left: 0;
-      width: 100%;
-      background: #ffeb3b;
-      z-index: 999;
+    /* ======= Welcome Section ======= */
+    .welcome {
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: center;
+      padding: 0 12px;
+    }
+
+    .welcome h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .steps {
       display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: nowrap;
-      padding: 10px 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 30px;
     }
 
-    .buttons button {
-      border: none;
-      padding: 8px 14px;
-      font-size: 13px;
-      border-radius: 8px;
-      font-weight: 600;
-      color: #000;
+    .step {
       background: #fff;
-      cursor: pointer;
-      transition: transform 0.15s;
+      border-radius: 10px;
+      padding: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      font-size: 15px;
+      font-weight: 500;
     }
 
-    .buttons button:hover {
-      transform: translateY(-2px);
+    /* ======= Package Deals Slider ======= */
+    .packages-container {
+      overflow-x: auto;
+      display: flex;
+      gap: 16px;
+      padding: 10px 16px 30px;
+      scroll-snap-type: x mandatory;
     }
 
-    /* ======= Embedded Blog Frame ======= */
-    .blog-frame {
-      width: 95%;
-      height: 1200px;
+    .package {
+      background: #fff;
+      flex: 0 0 280px;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      padding: 20px;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .package h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .package .price {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 10px 0;
+      color: var(--brand-green);
+    }
+
+    .package ul {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    .package ul li {
+      font-size: 14px;
+      margin: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .package ul li::before {
+      content: "✔";
+      color: var(--brand-accent);
+      font-weight: bold;
+    }
+
+    .package .disabled::before {
+      content: "✖";
+      color: red;
+    }
+
+    .get-btn {
+      background: var(--brand-accent);
       border: none;
-      margin: auto;
-      display: block;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .get-btn:hover {
+      background: #1a9edb;
     }
 
     /* ======= Footer ======= */
@@ -156,10 +230,13 @@
 </head>
 <body>
 
-  <!-- Banner -->
-  <div class="banner">
-    <img src="https://raw.githubusercontent.com/pgofficial1/ajartsite/main/Lumii_20250624_224140137.jpg" alt="AJart Banner"/>
+  <!-- Header -->
+  <div class="header">
     <button class="menu-btn" onclick="toggleMenu()">&#9776;</button>
+    <div class="title">AJart</div>
+    <div class="logo-circle">
+      <img src="Lumii_20250622_150347501.jpg" alt="Logo"/>
+    </div>
     <div class="menu" id="menu">
       <a href="index.html">Main page</a>
       <a href="about.html">About us</a>
@@ -169,15 +246,72 @@
     </div>
   </div>
 
-  <!-- Navigation buttons -->
-  <div class="buttons">
-    <button onclick="location.href='about.html'">About us</button>
-    <button onclick="location.href='services.html'">Our services</button>
-    <button onclick="location.href='earn.html'">Earn rewards 🎁</button>
+  <!-- Welcome Section -->
+  <div class="welcome">
+    <h1>Welcome to AJart Advertising Platform</h1>
+    <p>AJart is your trusted space to promote your business, projects, and ideas. 
+       We connect your message with the right audience and make your brand go viral with ease.</p>
+    <div class="steps">
+      <div class="step">1. Choose your package</div>
+      <div class="step">2. Select your choice</div>
+      <div class="step">3. Submit and wait for it to go viral</div>
+    </div>
   </div>
 
-  <!-- Embedded Blog Section -->
-  <iframe class="blog-frame" src="https://ajartprojects.blogspot.com"></iframe>
+  <!-- Package Deals -->
+  <div class="packages-container">
+    <div class="package">
+      <h2>Regular</h2>
+      <div class="price">$5</div>
+      <ul>
+        <li>3 Days duration</li>
+        <li>2 Platform options</li>
+        <li class="disabled">Notifications on ad posting</li>
+        <li class="disabled">Task-based platform</li>
+        <li class="disabled">Royalty badge</li>
+      </ul>
+      <button class="get-btn">Get Started</button>
+    </div>
+
+    <div class="package">
+      <h2>Standard</h2>
+      <div class="price">$9</div>
+      <ul>
+        <li>5 Days duration</li>
+        <li>3 Platform options</li>
+        <li>Notifications on ad posting</li>
+        <li class="disabled">Task-based platform</li>
+        <li class="disabled">Royalty badge</li>
+      </ul>
+      <button class="get-btn">Get Started</button>
+    </div>
+
+    <div class="package">
+      <h2>Premium</h2>
+      <div class="price">$15</div>
+      <ul>
+        <li>7 Days duration</li>
+        <li>5 Platform options</li>
+        <li>Notifications on ad posting</li>
+        <li>Task-based platform</li>
+        <li class="disabled">Royalty badge</li>
+      </ul>
+      <button class="get-btn">Get Started</button>
+    </div>
+
+    <div class="package">
+      <h2>Pro Ultimate</h2>
+      <div class="price">$30</div>
+      <ul>
+        <li>10 Days duration</li>
+        <li>All platform options</li>
+        <li>Notifications on ad posting</li>
+        <li>Task-based platform</li>
+        <li>Royalty badge</li>
+      </ul>
+      <button class="get-btn">Get Started</button>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>
@@ -198,7 +332,7 @@
     </div>
   </footer>
 
-  <!-- Script for menu toggle -->
+  <!-- Script -->
   <script>
     function toggleMenu() {
       const m = document.getElementById('menu');
